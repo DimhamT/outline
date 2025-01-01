@@ -4,14 +4,13 @@ up:
 	docker compose up -d redis postgres
 	yarn install-local-ssl
 	yarn install --pure-lockfile
-	# cp .env.sample .env
-	# @sed -i "s/^SECRET_KEY=.*/SECRET_KEY=$$(openssl rand -hex 32)/" .env;
-	# @sed -i "s/^UTILS_SECRET=.*/UTILS_SECRET=$$(openssl rand -hex 32)/" .env;
-	# @sed -i 's|^URL=.*|URL=http://127.0.0.1|' .env;
-	yarn dev:watch
+	cp .env.sample .env
+	@sed -i "s/^SECRET_KEY=.*/SECRET_KEY=$$(openssl rand -hex 32)/" .env;
+	@sed -i "s/^UTILS_SECRET=.*/UTILS_SECRET=$$(openssl rand -hex 32)/" .env;
+	@sed -i 's|^URL=.*|URL=http://127.0.0.1|' .env;
 
 build:
-	yarn install && yarn build
+	yarn build
 	docker build  --network=host -t outline/outline:${OUTLINE_VERSION} .
 
 test:
