@@ -9,6 +9,33 @@ import {
 } from "prosemirror-model";
 import { Command, Plugin, PluginKey, TextSelection } from "prosemirror-state";
 import { Decoration, DecorationSet } from "prosemirror-view";
+import refractor from "refractor/core";
+import bash from "refractor/lang/bash";
+import clike from "refractor/lang/clike";
+import cpp from "refractor/lang/cpp";
+import csharp from "refractor/lang/csharp";
+import css from "refractor/lang/css";
+import docker from "refractor/lang/docker";
+import go from "refractor/lang/go";
+import java from "refractor/lang/java";
+import javascript from "refractor/lang/javascript";
+import json from "refractor/lang/json";
+import julia from "refractor/lang/julia";
+import kotlin from "refractor/lang/kotlin";
+// @ts-expect-error type definition is missing, but package exists
+import mermaid from "refractor/lang/mermaid";
+import perl from "refractor/lang/perl";
+import php from "refractor/lang/php";
+import powershell from "refractor/lang/powershell";
+import python from "refractor/lang/python";
+import r from "refractor/lang/r";
+import rust from "refractor/lang/rust";
+import sql from "refractor/lang/sql";
+import swift from "refractor/lang/swift";
+import toml from "refractor/lang/toml";
+import typescript from "refractor/lang/typescript";
+import yaml from "refractor/lang/yaml";
+
 import { toast } from "sonner";
 import { Primitive } from "utility-types";
 import type { Dictionary } from "~/hooks/useDictionary";
@@ -40,7 +67,34 @@ import { getMarkRange } from "../queries/getMarkRange";
 import { isInCode } from "../queries/isInCode";
 import Node from "./Node";
 
-const DEFAULT_LANGUAGE = "javascript";
+const DEFAULT_LANGUAGE = "julia";
+
+[
+  bash,
+  cpp,
+  css,
+  clike,
+  csharp,
+  docker,
+  go,
+  java,
+  javascript,
+  json,
+  julia,
+  kotlin,
+  mermaid,
+  perl,
+  php,
+  python,
+  powershell,
+  r,
+  rust,
+  sql,
+  swift,
+  toml,
+  typescript,
+  yaml,
+].forEach(refractor.register);
 
 export default class CodeFence extends Node {
   constructor(options: {
@@ -98,9 +152,8 @@ export default class CodeFence extends Node {
       toDOM: (node) => [
         "div",
         {
-          class: `code-block ${
-            this.showLineNumbers ? "with-line-numbers" : ""
-          }`,
+          class: `code-block ${this.showLineNumbers ? "with-line-numbers" : ""
+            }`,
           "data-language": node.attrs.language,
         },
         ["pre", ["code", { spellCheck: "false" }, 0]],

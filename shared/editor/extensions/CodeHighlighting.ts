@@ -8,6 +8,35 @@ import { getLoaderForLanguage, getRefractorLangForLanguage } from "../lib/code";
 import { isRemoteTransaction } from "../lib/multiplayer";
 import { findBlockNodes } from "../queries/findChildren";
 
+export const LANGUAGES = {
+  none: "Plain text", // additional entry to disable highlighting
+  bash: "Bash",
+  clike: "C",
+  cpp: "C++",
+  csharp: "C#",
+  css: "CSS",
+  docker: "Docker",
+  go: "Go",
+  java: "Java",
+  javascript: "JavaScript",
+  json: "JSON",
+  julia: "Julia",
+  kotlin: "Kotlin",
+  mermaidjs: "Mermaid Diagram",
+  perl: "Perl",
+  php: "PHP",
+  powershell: "Powershell",
+  python: "Python",
+  r: "R",
+  rust: "Rust",
+  sql: "SQL",
+  swift: "Swift",
+  toml: "TOML",
+  typescript: "TypeScript",
+  vb: "Visual Basic",
+  yaml: "YAML",
+};
+
 type ParsedNode = {
   text: string;
   classes: string[];
