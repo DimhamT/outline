@@ -42,8 +42,14 @@ export default function useEditorClickHandlers({ shareId }: Params) {
           return;
         }
 
-        // parse shareId from link
-        const linkShareId = navigateTo.match(/\/s\/([^/]+)\/doc\//)?.[1];
+        // Link to asciinema or gitea should be opened in a new tab, not in the app
+        if (
+          navigateTo.startsWith("/asciinema") ||
+          navigateTo.startsWith("/git")
+        ) {
+          window.open(href, "_blank");
+          return;
+        }
 
         // If we're navigating to an internal document link then prepend the
         // share route to the URL so that the document is loaded in context
